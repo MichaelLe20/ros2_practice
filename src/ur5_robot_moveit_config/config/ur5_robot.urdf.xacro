@@ -6,9 +6,14 @@
     <xacro:include filename="$(find ur_description)/urdf/ur5.xacro" />
 
     <!-- Import control_xacro -->
-    <xacro:include filename="ur5_robot.ros2_control.xacro" />
+    <xacro:include filename="$(find ur5_robot_moveit_config)/config/ur5_robot.ros2_control.xacro" />
 
 
     <xacro:ur5_robot_ros2_control name="FakeSystem" initial_positions_file="$(arg initial_positions_file)"/>
 
+    <gazebo>
+      <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+        <parameters>$(find ur5_robot_moveit_config)/config/ros2_controllers.yaml</parameters>
+      </plugin>
+    </gazebo>
 </robot>
